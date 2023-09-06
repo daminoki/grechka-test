@@ -1,3 +1,5 @@
 import { apiHelper } from "./apiHelper";
 
-export const getSlidesList = async() => apiHelper('get', '/slides?offset=3&limit=3');
+export const getSlidesList = async(params) => {
+    return apiHelper('get', 'slides', { params })
+};
