@@ -21,20 +21,6 @@ import { getSlidesList } from "./apiHelper";
       
     await fetchData();
 
-    function insertSlides() {
-        const sliderContainer = document.querySelector('.cars__slider .swiper-wrapper');
-
-        sliderContainer.innerHTML = slidesList.map((slide, index) => {
-            return `
-                <div class="cars__slide swiper-slide">
-                    <div class="cars__img">
-                        <img src=${slide.imgUrl} alt=${slide.title}>
-                    </div>
-                </div>
-            `;
-        }).join('');
-    }
-
     let init = false;
 
     function initCarsSlider() {
@@ -49,6 +35,8 @@ import { getSlidesList } from "./apiHelper";
                         <div class="cars__img">
                             <img src=${slide.imgUrl} alt=${slide.title}>
                         </div>
+                        <h2 class="cars__title">${slide.title}</h2>
+                        <div class="cars__description-wrapper"><p class="cars__description">${slide.desc}</p></div>
                     </div>
                 `;
             }).join('');
@@ -56,6 +44,7 @@ import { getSlidesList } from "./apiHelper";
             const carsSlider = new Swiper('.cars__slider', {
                 slidesPerView: 1,
                 allowTouchMove: false,
+                speed: 1000,
         
                 navigation: {
                     nextEl: '.cars__next-button',
@@ -81,7 +70,7 @@ import { getSlidesList } from "./apiHelper";
                                 fetchParams.offset += 3;
                                 await fetchData();
                                 const fetchedSlides = slidesList.map((slide) => {
-                                    return `<div class="cars__slide swiper-slide"><div class="cars__img"><img src=${slide.imgUrl} alt=${slide.title}></div></div>`
+                                    return `<div class="cars__slide swiper-slide"><div class="cars__img"><img src=${slide.imgUrl} alt=${slide.title}></div><h2 class="cars__title">${slide.title}</h2></div>`
                                 });
                                 s.appendSlide(fetchedSlides);
                             }

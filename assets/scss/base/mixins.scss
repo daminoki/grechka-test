@@ -1,6 +1,6 @@
 @font-face {
-    font-family: 'NoirPro-Italic';
-	src: local('NoirPro-Italic'), local('NoirPro Italic'), url('../fonts/NoirPro-Italic.woff2') format('woff2');
+    font-family: 'NoirPro-BoldItalic';
+	src: local('NoirPro-BoldItalic'), local('NoirPro BoldItalic'), url('../fonts/NoirPro-BoldItalic.woff2') format('woff2');
 	font-style: normal;
 	font-weight: 400;
 	font-display: swap;
@@ -15,7 +15,7 @@
 }
 	
 @mixin h1 {
-    font-family: 'NoirPro-Italic', sans-serif;
+    font-family: 'NoirPro-BoldItalic', sans-serif;
     font-size: 132px;
     font-style: normal;
     font-weight: 400;
@@ -24,7 +24,7 @@
 }
 
 @mixin h2 {
-    font-family: 'NoirPro-Italic', sans-serif;
+    font-family: 'NoirPro-BoldItalic', sans-serif;
     font-size: 32px;
     font-style: normal;
     font-weight: 400;
