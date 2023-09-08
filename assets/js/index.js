@@ -35,7 +35,9 @@ import { getSlidesList } from "./apiHelper";
                         <div class="cars__img">
                             <img src=${slide.imgUrl} alt=${slide.title}>
                         </div>
-                        <h2 class="cars__title">${slide.title}</h2>
+                        <div class=cars__title-wrapper>
+                            <h2 class="cars__title">${slide.title}</h2>
+                        </div>
                         <div class="cars__description-wrapper"><p class="cars__description">${slide.desc}</p></div>
                     </div>
                 `;
@@ -70,7 +72,16 @@ import { getSlidesList } from "./apiHelper";
                                 fetchParams.offset += 3;
                                 await fetchData();
                                 const fetchedSlides = slidesList.map((slide) => {
-                                    return `<div class="cars__slide swiper-slide"><div class="cars__img"><img src=${slide.imgUrl} alt=${slide.title}></div><h2 class="cars__title">${slide.title}</h2></div>`
+                                    return `
+                                        <div class="cars__slide swiper-slide">
+                                            <div class="cars__img">
+                                                <img src=${slide.imgUrl} alt=${slide.title}>
+                                            </div>
+                                            <h2 class="cars__title">${slide.title}</h2>
+                                            <div class="cars__description-wrapper">
+                                                <p class="cars__description">${slide.desc}</p>
+                                            </div>
+                                        </div>`
                                 });
                                 s.appendSlide(fetchedSlides);
                             }
