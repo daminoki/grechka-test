@@ -1,4 +1,4 @@
-import { getSlidesList } from "./apiHelper";
+import { getSlidesList, setLike } from "./apiHelper";
 
 (async () => {
     let slidesList = [];
@@ -18,10 +18,23 @@ import { getSlidesList } from "./apiHelper";
         }
     }
 
-      
     await fetchData();
 
     let init = false;
+
+    const handleLikeButtonClick = (s) => {
+        const sliderSlides = document.querySelectorAll('.cars__slide');
+        const likeButton = sliderSlides[s.realIndex].querySelector('.cars__like-button');
+        const likeCount = sliderSlides[s.realIndex].querySelector('.cars__like-count span');
+    
+        likeButton.addEventListener('click', async () => {
+            await setLike(likeButton.dataset.index);
+            likeButton.style.pointerEvents = 'none';
+            likeButton.classList.add('cars__like-button_active');
+            likeCount.textContent = Number(likeCount.textContent) + 1;
+        });
+    };
+    
 
     function initCarsSlider() {
         if (slidesList.length > 0) {
@@ -39,6 +52,10 @@ import { getSlidesList } from "./apiHelper";
                             <h2 class="cars__title">${slide.title}</h2>
                         </div>
                         <div class="cars__description-wrapper"><p class="cars__description">${slide.desc}</p></div>
+                        <div class="cars__like-wrapper">
+                            <button type="button" class="cars__like-button" data-index=${slide.id}></button>
+                            <p class="cars__like-count">like: <span>${slide.likeCnt}</span></p>
+                        </div>
                     </div>
                 `;
             }).join('');
@@ -65,6 +82,10 @@ import { getSlidesList } from "./apiHelper";
                 },
 
                 on: {
+                    init: function (s) {
+                        handleLikeButtonClick(s);
+                    },
+
                     slideChange: async function (s) {
                         if (s.realIndex === s.slides.length - 1) {
                             console.log(slidesNumber - fetchParams.offset > 3)
@@ -81,11 +102,17 @@ import { getSlidesList } from "./apiHelper";
                                             <div class="cars__description-wrapper">
                                                 <p class="cars__description">${slide.desc}</p>
                                             </div>
+                                            <div class="cars__like-wrapper">
+                                                <button type="button" class="cars__like-button"></button>
+                                                <p class="cars__like-count">like: <span>${slide.likeCnt}</span></p>
+                                            </div>
                                         </div>`
                                 });
                                 s.appendSlide(fetchedSlides);
                             }
-                        }
+                        };
+
+                        handleLikeButtonClick(s);
                     }
                 }
             });
@@ -96,6 +123,4 @@ import { getSlidesList } from "./apiHelper";
     }
 
     initCarsSlider();
-
-    console.log(slidesList);
 })()
