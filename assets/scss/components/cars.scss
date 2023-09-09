@@ -168,8 +168,14 @@
             background-image: url("../img/like-button-active.png");
         }
 
+        &:disabled {
+            opacity: .3;
+            pointer-events: none;
+        }
+
         &_active {
             background-image: url("../img/like-button-active.png");
+            pointer-events: none;
 
             &:hover {
                 background-image: url("../img/like-button-active-hover.png");
