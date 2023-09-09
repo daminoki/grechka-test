@@ -1,13 +1,19 @@
 import { setLike } from "../apiHelper";
+import { popup } from "../components/popup";
 
 export function handleButtonClick(slider) {
     const sliderSlides = document.querySelectorAll('.cars__slide');
     const likeButton = sliderSlides[slider.realIndex].querySelector('.cars__like-button');
-    const likeCount = sliderSlides[slider.realIndex].querySelector('.cars__like-count span');    
+    const likeCount = sliderSlides[slider.realIndex].querySelector('.cars__like-count span');
+    let popupData = {};
 
     likeButton.addEventListener('click', async function () {
         likeButton.disabled = true;
-        await setLike(likeButton.dataset.index);
+        const data = await setLike(likeButton.dataset.index);
+        if (data) {
+            popupData = data;
+        }
+
         likeButton.disabled = false;
         likeButton.classList.add('cars__like-button_active');
 
@@ -17,6 +23,8 @@ export function handleButtonClick(slider) {
         localStorage.setItem("likedArray", JSON.stringify(localStorageData));
 
         likeCount.textContent = Number(likeCount.textContent) + 1;
+
+        popup(popupData);
     })
 
     let localStorageData;
