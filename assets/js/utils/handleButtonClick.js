@@ -9,20 +9,27 @@ export function handleButtonClick(slider) {
 
     likeButton.addEventListener('click', async function () {
         likeButton.disabled = true;
-        const data = await setLike(likeButton.dataset.index);
+        const { data, error } = await setLike(likeButton.dataset.index);
         if (data) {
             popupData = data;
+
+            likeButton.disabled = false;
+            likeButton.classList.add('cars__like-button_active');
+
+            const id = likeButton.dataset.index;
+
+            localStorageData.push({ id: Number(id), isLiked: true, likeCount: Number(likeCount.textContent) + 1 });
+            localStorage.setItem("likedArray", JSON.stringify(localStorageData));
+
+            likeCount.textContent = Number(likeCount.textContent) + 1;
         }
 
-        likeButton.disabled = false;
-        likeButton.classList.add('cars__like-button_active');
-
-        const id = likeButton.dataset.index;
-
-        localStorageData.push({ id: Number(id), isLiked: true, likeCount: Number(likeCount.textContent) + 1 });
-        localStorage.setItem("likedArray", JSON.stringify(localStorageData));
-
-        likeCount.textContent = Number(likeCount.textContent) + 1;
+        if (error) {
+            popupData = {
+                title: "Произошла ошибка",
+                desc: "Пожалуйста, попробуйте позже"
+            };
+        }
 
         popup(popupData);
     })

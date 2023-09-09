@@ -21,9 +21,8 @@ export const apiHelper = async (method, url, ...args) => {
   
         const data = await response.json();
   
-        return data;
+        return { data: data, error: null };
     } catch (err) {
-        alert(err);
-        return null;
+        return { data: null, error: err };
     }
 };

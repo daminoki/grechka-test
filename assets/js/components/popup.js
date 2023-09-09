@@ -1,7 +1,7 @@
 export function popup(data) {
     const popup = document.querySelector('.popup');
     const popupCloseButton = document.querySelector('.popup__close-button');
-
+    const popupContainer = document.querySelector('.popup__info');
     let scrollPosition = 0
         
     function blockScroll() {
@@ -21,6 +21,11 @@ export function popup(data) {
         const mainPage = document.querySelector('.page-container')
         mainPage.style.top = ""
     }
+
+    popupContainer.innerHTML = `
+        <p class="popup__title">${data.title}</p>
+        <p class="popup__text">${data.desc}</p>
+    `
 
     popup.classList.add('popup_opened');
     blockScroll();
