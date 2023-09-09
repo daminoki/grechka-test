@@ -5,6 +5,7 @@ import { handleButtonClick } from "../utils/handleButtonClick";
 
 export async function carsSlider() {
     const sliderContainer = document.querySelector('.cars__slider .swiper-wrapper');
+    const sliderControlsContainer = document.querySelector('.cars__controls');
     let init = false;
 
     const searchParams = {
@@ -22,6 +23,18 @@ export async function carsSlider() {
         init = true;
 
         sliderContainer.innerHTML = insertSlides(slidesList).join("");
+        sliderControlsContainer.innerHTML = `
+            <button class="cars__prev-button">
+                <svg width="152" height="32">
+                    <use xlink:href="#arrow"></use>
+                </svg>
+            </button>
+            <button class="cars__next-button">
+                <svg width="152" height="32">
+                    <use xlink:href="#arrow"></use>
+                </svg>
+            </button>
+        `
 
         const carsSlider = new Swiper('.cars__slider', {
             slidesPerView: 1,

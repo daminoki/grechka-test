@@ -1,0 +1,14 @@
+.logo {
+    position: absolute;
+    top: 53px;
+    right: 64px;
+    z-index: 1;
+
+    @include phone {
+        top: 15px;
+        right: 15px;
+    }
+    svg use {
+        clip-path: url(#clip0_7_18)
+    }
+}

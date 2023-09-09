@@ -10,6 +10,7 @@ export function handleButtonClick(slider) {
     likeButton.addEventListener('click', async function () {
         likeButton.disabled = true;
         const { data, error } = await setLike(likeButton.dataset.index);
+        
         if (data) {
             popupData = data;
 

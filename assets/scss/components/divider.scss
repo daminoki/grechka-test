@@ -1,0 +1,10 @@
+.divider {
+    position: absolute;
+    top: 190px;
+    z-index: 1;
+    width: 100%;
+
+    @include phone {
+        top: 100px;
+    }
+}

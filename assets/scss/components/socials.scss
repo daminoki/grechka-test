@@ -1,0 +1,23 @@
+.socials {
+    position: absolute;
+    z-index: 1;
+    bottom: 40px;
+    right: 64px;
+    display: flex;
+    gap: 15px;
+
+    @include phone {
+        right: 10px;
+        bottom: 25px;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    &__link {
+        color: var(--typo-grey);
+    
+        &:hover {
+            color: var(--typo-contrast);
+        }
+    }
+}

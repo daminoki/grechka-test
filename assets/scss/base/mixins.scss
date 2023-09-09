@@ -40,3 +40,9 @@
     letter-spacing: -1px;
     text-transform: uppercase;
 }
+
+@mixin phone {
+    @media (max-width: 767px) {
+        @content;
+    }
+}

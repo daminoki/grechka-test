@@ -1,7 +1,6 @@
 .cars {
     width: 100%;
     height: 100%;
-    background-color: var(--typo-grey);
     position: relative;
 
     &__slider {
@@ -27,22 +26,53 @@
         }
 
         &.swiper-slide-active .cars__title, &.swiper-slide-active .cars__description {
-                opacity: 1;
+            opacity: 1;
+        }
+
+        &.swiper-slide-prev {
+            @include phone {
+                & .cars__img {
+                    object-position: 80%;
+                }
             }
+        }
     }
 
-    &__img {
+    &__img-container {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
         z-index: -1;
-        img {
+    }
+
+    &__img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-        }
+            @include phone {
+                object-position: 22%;
+                transition: object-position 1.5s ease-in;
+            }
+    }
+
+    &__img-error {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--error-bg);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__error-text {
+        @include h1;
+        color: var(--typo-error);
     }
 
     &__controls {
@@ -55,6 +85,11 @@
         align-items: center;
         justify-content: space-between;
         z-index: 10;
+
+        @include phone {
+            left: 15px;
+            right: 15px;
+        }
     }
 
     &__prev-button, &__next-button {
@@ -78,16 +113,6 @@
         transform: rotate(180deg);
     }
 
-    &__logo {
-        position: absolute;
-        top: 53px;
-        right: 64px;
-        z-index: 1;
-        svg use {
-            clip-path: url(#clip0_7_18)
-        }
-    }
-
     &__title-wrapper {
         width: 80%
     }
@@ -102,6 +127,11 @@
         overflow: hidden;
         opacity: 0;
         transition: opacity 1.5s ease-out;
+
+        @include phone {
+            @include h2;
+            padding: 30px 0 40px 15px;
+        }
     }
 
     &__description-wrapper {
@@ -111,36 +141,16 @@
     &__description {
         @include txt20;
         color: var(--typo-grey);
-        padding: 0 0 0 72px;
+        padding-left: 72px;
         display: -webkit-box;
         -webkit-line-clamp: 4;
         -webkit-box-orient: vertical;  
         overflow: hidden;
         opacity: 0;
         transition: opacity 1.5s ease-out;
-    }
 
-    &__divider {
-        position: absolute;
-        top: 187px;
-        z-index: 1;
-        width: 100%;
-    }
-
-    &__socials {
-        position: absolute;
-        z-index: 1;
-        bottom: 40px;
-        right: 64px;
-        display: flex;
-        gap: 15px;
-    }
-
-    &__socials-link {
-        color: var(--typo-grey);
-
-        &:hover {
-            color: var(--typo-contrast);
+        @include phone {
+            padding-left: 15px;
         }
     }
 
@@ -151,21 +161,26 @@
         flex-direction: column;
         align-items: center;
         gap: 15px;
+
+        @include phone {
+            padding: 0 0 15px;
+            gap: 7px;
+        }
     }
 
     &__like-button {
         width: 72px;
         height: 72px;
-        background-image: url("../img/like-button.png");
+        background-image: url("../img/like-button.svg");
         background-size: 100%;
         cursor: pointer;
 
         &:hover {
-            background-image: url("../img/like-button-hover.png");
+            background-image: url("../img/like-button-hover.svg");
         }
 
         &:active {
-            background-image: url("../img/like-button-active.png");
+            background-image: url("../img/like-button-active.svg");
         }
 
         &:disabled {
@@ -174,11 +189,11 @@
         }
 
         &_active {
-            background-image: url("../img/like-button-active.png");
+            background-image: url("../img/like-button-active.svg");
             pointer-events: none;
 
             &:hover {
-                background-image: url("../img/like-button-active-hover.png");
+                background-image: url("../img/like-button-active-hover.svg");
             }
         }
     }
