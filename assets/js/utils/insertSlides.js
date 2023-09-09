@@ -7,6 +7,7 @@ export function insertSlides(slidesArray) {
             imgElement.alt = slide.title;
             
             imgElement.onerror = function() {
+                console.log(1)
                 const errorElement = `
                     <div class="cars__img-error">
                         <p class="cars__error-text">ERROR</p>
